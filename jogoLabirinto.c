@@ -68,7 +68,8 @@ int movingDone(int game[][col], char toWhere, int playerLoc[2], int over, int th
         }
     } else if(toWhere == 'L' || toWhere == 'l') {
         if(game[playerX][playerY-1] == -4) over++;
-        else if((game[playerX][playerY-1] == -6 && thereIs) || (game[playerX][playerY-1] <= -2 && game[playerX][playerY-1] >= -5)) {
+        
+        if((game[playerX][playerY-1] == -6 && thereIs) || (game[playerX][playerY-1] <= -2 && game[playerX][playerY-1] >= -5)) {
             if(game[playerX][playerY-1] == -5) *p = 1;
 
             game[playerX][playerY-1] = -3;
