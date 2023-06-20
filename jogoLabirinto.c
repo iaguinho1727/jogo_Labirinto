@@ -37,13 +37,9 @@ int movingDone(int game[][col], char toWhere, int playerLoc[2], int over, int th
     int playerY = playerLoc[1];
 
     if(toWhere == 'U' || toWhere == 'u') {
-        if(game[playerX-1][playerY] == -4) {
-            over++;
-            game[playerX-1][playerY] = -3;
-            game[playerX][playerY] = -2; 
-            playerLoc[0]--;
-        }
-        else if((game[playerX-1][playerY] == -6 && thereIs) || game[playerX-1][playerY] == -2 || game[playerX-1][playerY] == -5) {   
+        if(game[playerX-1][playerY] == -4) over++;
+        
+        if((game[playerX-1][playerY] == -6 && thereIs) || (game[playerX-1][playerY] <= -2 && game[playerX-1][playerY] >= -5)) {   
             if(game[playerX-1][playerY] == -5) *p = 1;
 
             game[playerX-1][playerY] = -3;
@@ -51,13 +47,9 @@ int movingDone(int game[][col], char toWhere, int playerLoc[2], int over, int th
             playerLoc[0]--; 
         }
     } else if(toWhere == 'R' || toWhere == 'r') {
-        if(game[playerX][playerY+1] == -4) {
-            over++;
-            game[playerX][playerY+1] = -3;
-            game[playerX][playerY] = -2;
-            playerLoc[1]++;
-        }
-        else if((game[playerX][playerY+1] == -6 && thereIs) || game[playerX][playerY+1] == -2 || game[playerX][playerY+1] == -5) {
+        if(game[playerX][playerY+1] == -4) over++;
+
+        if((game[playerX][playerY+1] == -6 && thereIs) || (game[playerX][playerY+1] <= -2 && game[playerX][playerY+1] >= -5)) {
             if(game[playerX][playerY+1] == -5) *p = 1;
 
             game[playerX][playerY+1] = -3;
@@ -65,13 +57,9 @@ int movingDone(int game[][col], char toWhere, int playerLoc[2], int over, int th
             playerLoc[1]++;
         }
     } else if(toWhere == 'D' || toWhere == 'd') {
-        if(game[playerX+1][playerY] == -4) {
-            over++;
-            game[playerX+1][playerY] = -3;
-            game[playerX][playerY] = -2;
-            playerLoc[0]++;
-        }
-        else if((game[playerX+1][playerY] == -6 && thereIs) || game[playerX+1][playerY] == -2 || game[playerX+1][playerY] == -5) {
+        if(game[playerX+1][playerY] == -4) over++;
+
+        if((game[playerX+1][playerY] == -6 && thereIs) || (game[playerX+1][playerY] <= -2 && game[playerX+1][playerY] >= -5)) {
             if(game[playerX+1][playerY] == -5) *p = 1;
 
             game[playerX+1][playerY] = -3;
@@ -79,13 +67,8 @@ int movingDone(int game[][col], char toWhere, int playerLoc[2], int over, int th
             playerLoc[0]++;
         }
     } else if(toWhere == 'L' || toWhere == 'l') {
-        if(game[playerX][playerY-1] == -4) {
-            over++;
-            game[playerX][playerY-1] = -3;
-            game[playerX][playerY] = -2;
-            playerLoc[1]--;
-        }
-        else if((game[playerX][playerY-1] == -6 && thereIs) || game[playerX][playerY-1] == -2 || game[playerX][playerY-1] == -5) {
+        if(game[playerX][playerY-1] == -4) over++;
+        else if((game[playerX][playerY-1] == -6 && thereIs) || (game[playerX][playerY-1] <= -2 && game[playerX][playerY-1] >= -5)) {
             if(game[playerX][playerY-1] == -5) *p = 1;
 
             game[playerX][playerY-1] = -3;
@@ -117,16 +100,16 @@ int main() {
                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     escreverGame(game);
 
-    int over = 0;
-    int playerLoc[2];
-    int thereIs = 0;
-    int *p = &thereIs;
+    int over = 0, playerLoc[2], thereIs = 0, *p = &thereIs;
     acharPlayer(game, playerLoc);
+
     while(!over) {
         char move;
         printf("\nWrite the next move: ");
         scanf("%c", &move);
+
         over = movingDone(game, move, playerLoc, over, thereIs, p);
+
         escreverGame(game);
     }
 
