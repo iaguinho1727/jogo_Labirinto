@@ -8,11 +8,14 @@
 // -5 -> chave
 // -6 -> porta
 
-#define lin 2
-#define col 5
-#define prof 10
+#define L 2
+#define C 5
+#define P 10
 
-void escreverGame(int game[][prof]) {
+#define lin 5
+#define col 10
+
+void escreverGame(int game[][col]) {
     system("cls");
 
     printf("\n");
@@ -20,8 +23,8 @@ void escreverGame(int game[][prof]) {
     printf("# -> Walls; \033[34m @ \033[0m -> Player; \033[31m * \033[0m -> Coin; \033[33m ! \033[0m -> Key; \033[29m | \033[0m -> Door\n\n");
 
     int x,y;
-    for( x = 0 ; x < col ; x++ ) {
-        for( y = 0 ; y < prof ; y++ ) {
+    for( x = 0 ; x < lin ; x++ ) {
+        for( y = 0 ; y < col ; y++ ) {
             if(game[x][y] == -1) printf("\033[00m###\033[0m");
             else if(game[x][y] == -2) printf("   ");
             else if(game[x][y] == -3) printf("\033[34m @ \033[0m");
@@ -34,7 +37,7 @@ void escreverGame(int game[][prof]) {
     }
 }
 
-int movingDone(int game[][prof], char toWhere, int playerLoc[2], int over, int thereIs, int *p) {
+int movingDone(int game[][col], char toWhere, int playerLoc[2], int over, int thereIs, int *p) {
     int playerX = playerLoc[0];
     int playerY = playerLoc[1];
 
@@ -83,10 +86,10 @@ int movingDone(int game[][prof], char toWhere, int playerLoc[2], int over, int t
     return over;
 }
 
-void acharPlayer(int game[][prof], int locPlayer[2]) {
+void acharPlayer(int game[][col], int locPlayer[2]) {
     int x,y;
-    for( x = 0 ; x < col ; x++ ) {
-        for( y = 0 ; y < prof ; y++ ) {
+    for( x = 0 ; x < lin ; x++ ) {
+        for( y = 0 ; y < col ; y++ ) {
             if(game[x][y] == -3) {
                 locPlayer[0] = x;
                 locPlayer[1] = y;
@@ -95,17 +98,17 @@ void acharPlayer(int game[][prof], int locPlayer[2]) {
     }
 }
 
-void preencherMapa(int game[][col][prof], int round[][prof], int profu) {
+void preencherMapa(int game[][C][P], int round[][col], int fase) {
     int x,y;
-    for( x = 0 ; x < col ; x++ ) {
-        for( y = 0 ; y < prof ; y++ ) {
-            round[x][y] = game[profu][x][y];
+    for( x = 0 ; x < lin ; x++ ) {
+        for( y = 0 ; y < col ; y++ ) {
+            round[x][y] = game[fase][x][y];
         }
     } 
 }
 
 int main() {
-    int game[lin][col][prof] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+    int game[L][C][P] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
                                 -1,-2,-3,-2,-2,-5,-1,-4,-2,-1,
                                 -1,-2,-1,-1,-1,-1,-1,-1,-2,-1,
                                 -1,-2,-2,-6,-2,-2,-2,-2,-2,-1,
@@ -137,18 +140,17 @@ int main() {
                             //     -1,-2,-2,-4,-1,
                             //     -1,-1,-1,-1,-1}
 
-    int round[col][prof];
-    int profu = 0;
-    preencherMapa(game, round, profu);
+    int round[lin][col];
+    int fase = 0;
+    preencherMapa(game, round, fase);
 
     escreverGame(round);
-
 
     int over = 0, playerLoc[2], thereIs = 0, *p = &thereIs;
 
     int x,y,z;
 
-    for( x = 0 ; x < lin ; x++ ) {
+    for( x = 0 ; x < L ; x++ ) {
         acharPlayer(round, playerLoc);
         while(!over) {
             char move;
@@ -160,19 +162,11 @@ int main() {
         }
         printf("\nCongrutalion, you find the coin!\n");
         over--;
-        profu++;
-        // printf("%i\n", profu);
-        // getch();
-        if(profu < lin) preencherMapa(game, round, profu);
+        fase++;
+
+        if(fase < L) preencherMapa(game, round, fase);
     }
 
-    // for(x = 0; x < col; x++) {
-    //     for(y = 0; y < prof; y++) {
-    //         printf("%i", round[x][y]);
-    //     }
-    //     printf("\n");
-    // }
-    getch();
     system("cls");
     escreverGame(round);
     printf("\nThank u for play my game! :)\n");
