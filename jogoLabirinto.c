@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 // -1 -> parede
 // -2 -> ''
 // -3 -> jogador
@@ -16,7 +15,7 @@
 #define col 10
 
 void escreverGame(int game[][col]) {
-    system("cls");
+    system("clear");
 
     printf("\n");
     printf("Tips: \nU/u -> move to up; D/d -> move to down; R/r -> move to right; L/l -> move to left\n");
@@ -148,12 +147,12 @@ int main() {
         over--;
         fase++;
         thereIs--;
-        getch();
+        system("pause");
 
         if(fase < L) preencherMapa(game, round, fase);
     }
 
-    system("cls");
+    system("clear");
     escreverGame(round);
     printf("\nThank u for play my game! :)\n");
 
