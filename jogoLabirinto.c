@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 // -1 -> parede
 // -2 -> ''
 // -3 -> jogador
