@@ -1,1 +1,1 @@
-# jogoLab
+Jogo Labirinto em C
