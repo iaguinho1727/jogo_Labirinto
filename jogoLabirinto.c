@@ -16,7 +16,11 @@
 #define col 10
 
 void escreverGame(int game[][col]) {
-    system("clear");
+    #if __WIN32 || __WIN64
+        system("cls");
+    #else
+        system("clear");
+    #endif
 
     printf("\n");
     printf("Tips: \nU/u -> move to up; D/d -> move to down; R/r -> move to right; L/l -> move to left\n");
