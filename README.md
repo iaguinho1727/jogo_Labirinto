@@ -1,5 +1,5 @@
 # Jogo Labirinto
-<img src="https://ibb.co/d6fMHjW" alt="Jogo" border="1">
+<img src="//i.ibb.co/5v14JGM/2023-12-04-15-35-23.gif" alt="Jogo" border="1">
 
 ---
 
